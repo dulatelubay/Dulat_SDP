@@ -1,8 +1,10 @@
+//Abstract Factory Pattern
+//Interfac
 public interface CoffeeIngredientsFactory {
-    MilkProduct createMilk();
-    SyrupProduct createSyrup();
+    MilkProduct createMilk();//Method that creates milk product
+    SyrupProduct createSyrup();//Method that creates syrup product
 }
-
+//Factory for creating ingredients specifically for Cappuccino.
 class CappuccinoIngredientsFactory implements CoffeeIngredientsFactory {
     @Override
     public MilkProduct createMilk() {
@@ -14,7 +16,7 @@ class CappuccinoIngredientsFactory implements CoffeeIngredientsFactory {
         return new VanillaSyrup();
     }
 }
-
+//Factory for creating custom ingredients
 class CustomIngredientsFactory implements CoffeeIngredientsFactory {
     @Override
     public MilkProduct createMilk() {
