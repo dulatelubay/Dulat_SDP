@@ -1,15 +1,31 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    public static void main(String[] args) throws CloneNotSupportedException {
+        // Singleton: CoffeeShop instance
+        CoffeeShopSingleton coffeeShop = CoffeeShopSingleton.getInstance();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        // Factory Method: Create coffee (Cappuccino or Espresso)
+        CoffeeFactoryMethod espressoFactory = new EspressoFactory();
+        CoffeeProduct espresso = espressoFactory.createCoffee();
+
+        // Abstract Factory: Create ingredients for Cappuccino
+        CoffeeIngredientsFactory ingredientsFactory = new CappuccinoIngredientsFactory();
+        MilkProduct milk = ingredientsFactory.createMilk();
+        SyrupProduct syrup = ingredientsFactory.createSyrup();
+
+        // Builder: Create custom CoffeeOrder
+        CoffeeOrderBuilder builder = new CoffeeOrderBuilder();
+        CoffeeOrderPrototype order = builder
+                .selectCoffee(espresso)
+                .addMilk(milk)
+                .addSyrup(syrup)
+                .build();
+
+        coffeeShop.placeOrder(order);
+        coffeeShop.serveOrder(order);
+
+        // Prototype: Clone the order
+        CoffeeOrderPrototype clonedOrder = order.clone();
+        coffeeShop.placeOrder(clonedOrder);
+        coffeeShop.serveOrder(clonedOrder);
     }
 }
